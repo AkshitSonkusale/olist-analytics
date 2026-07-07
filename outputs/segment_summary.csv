@@ -1,0 +1,7 @@
+segment,customers,revenue,avg_value,avg_recency_days
+Recent High-Value,14413,4354175.42,302.1,92.0
+Mid-Tier,32708,4323837.18,132.2,230.0
+Lapsed High-Value,13780,4240936.16,307.76,394.0
+Repeat Buyers,2801,864187.46,308.53,221.0
+Hibernating,15349,855198.74,55.72,397.0
+Recent Low-Value,14307,781438.79,54.62,90.0

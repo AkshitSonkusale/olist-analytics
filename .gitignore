@@ -1,0 +1,5 @@
+# Raw Kaggle data — download separately (see README), do not commit (~120 MB, Kaggle license)
+data/*.csv
+# DuckDB scratch
+*.duckdb
+__pycache__/

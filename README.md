@@ -69,7 +69,26 @@ python scripts/run_duckdb.py
 ```
 This runs the exact same view SQL against the CSVs and rewrites `outputs/`.
 
-> All figures in this README were produced by the pipeline. Re-run it before quoting any number on a resume so it's yours, not copied.
+## Dashboard
+
+Interactive Power BI dashboard built on the SQL output tables in `outputs/`. Three pages:
+
+**1. Executive Overview** — total revenue, orders, average order value, and unique
+customers, with the monthly revenue trend (Sep 2016 – Oct 2018).
+> 96K orders across 93.4K unique customers — nearly every customer purchased only once.
+
+**2. Cohort Retention** — monthly signup cohorts tracked across months since first
+purchase, heatmap-colored by active customers.
+> Repeat activity drops off sharply after month 0; a ~3% repeat rate is the dominant pattern.
+
+**3. Customer Segments** — RFM-based segments ranked by revenue, with per-segment
+customer counts, average order value, and recency.
+> Repeat Buyers are just 2,801 customers but carry the highest average value — a small,
+> high-value core worth protecting.
+
+![Overview](powerbi/olist1.png)
+![Cohort Retention](powerbi/olist2.png)
+![Customer Segments](powerbi/olist3.png)
 
 ## Notes / limitations
 - Raw data isn't committed (Kaggle license, ~120 MB) — download it yourself; `.gitignore` excludes `data/*.csv`.

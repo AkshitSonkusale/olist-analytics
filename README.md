@@ -75,3 +75,9 @@ This runs the exact same view SQL against the CSVs and rewrites `outputs/`.
 - Raw data isn't committed (Kaggle license, ~120 MB) — download it yourself; `.gitignore` excludes `data/*.csv`.
 - Cohort *retention* is intentionally sparse: it reflects the real ~3% repeat rate, and that sparsity is a finding, not a bug.
 - Revenue = item `price` + `freight_value` on `delivered` orders. Swap in `order_payments.payment_value` if you want gross paid amounts instead.
+
+## Dashboard
+
+![Overview](powerbi/olist1.png)
+![Cohort Retention](powerbi/olist2.png)
+![Customer Segments](powerbi/olist3.png)

@@ -1,4 +1,4 @@
-# Olist Retail Analytics 
+# Olist Retail Analytics
 
 Customer segmentation and retention analysis on the [Olist Brazilian e-commerce dataset](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) (~99K orders, ~93K unique customers, 2016–2018). Using PostgreSQL for the analytical layer and Power BI for the dashboard.
 

@@ -30,7 +30,30 @@ Customer segmentation and retention analysis on the [Olist Brazilian e-commerce 
 
 ---
 
-## Design Decisions:
+## Dashboard
+
+Interactive Power BI dashboard built on the SQL output tables in `outputs/`. Three pages:
+
+**1. Executive Overview** — total revenue, orders, average order value, and unique
+customers, with the monthly revenue trend (Sep 2016 – Oct 2018).
+> 96K orders across 93.4K unique customers — nearly every customer purchased only once.
+
+**2. Cohort Retention** — monthly signup cohorts tracked across months since first
+purchase, showing the % of each cohort that buys again (2017–2018 cohorts).
+> Only ~0.5% of a cohort buys again in month 1, and it stays under 1% after that; ~3% of customers ever buy twice.
+
+**3. Customer Segments** — RFM-based segments ranked by revenue, with per-segment
+customer counts, revenue, and average customer value.
+> Repeat Buyers are just 2,801 customers but carry the highest average value — a small,
+> high-value core worth protecting.
+
+![Overview](powerbi/olist1.png)
+![Cohort Retention](powerbi/olist2.png)
+![Customer Segments](powerbi/olist3.png)
+
+---
+
+## Two design decisions
 
 1. **`customer_id` is not a person.** In Olist it is regenerated per order; the true identity is `customer_unique_id`. Every RFM/cohort join goes through it — otherwise every customer looks like a one-time buyer and repeat behaviour disappears.
 2. **A textbook Frequency score is degenerate here.** With 97% one-time buyers, an F-quintile is meaningless, so segments are driven by **Recency × Monetary**, and the rare repeat buyers (`frequency ≥ 2`) are isolated as their own segment. R/F/M quintiles are still computed to show the technique, but the segmentation is adapted to what the data actually supports. This is the difference between running a template and reading the data.
@@ -69,34 +92,8 @@ python scripts/run_duckdb.py
 ```
 This runs the exact same view SQL against the CSVs and rewrites `outputs/`.
 
-## Dashboard
-
-Interactive Power BI dashboard built on the SQL output tables in `outputs/`. Three pages:
-
-**1. Executive Overview** — total revenue, orders, average order value, and unique
-customers, with the monthly revenue trend (Sep 2016 – Oct 2018).
-> 96K orders across 93.4K unique customers — nearly every customer purchased only once.
-
-**2. Cohort Retention** — monthly signup cohorts tracked across months since first
-purchase, heatmap-colored by active customers.
-> Repeat activity drops off sharply after month 0; a ~3% repeat rate is the dominant pattern.
-
-**3. Customer Segments** — RFM-based segments ranked by revenue, with per-segment
-customer counts, average order value, and recency.
-> Repeat Buyers are just 2,801 customers but carry the highest average value — a small,
-> high-value core worth protecting.
-
-![Overview](powerbi/olist1.png)
-![Cohort Retention](powerbi/olist2.png)
-![Customer Segments](powerbi/olist3.png)
-
 ## Notes / limitations
 - Raw data isn't committed (Kaggle license, ~120 MB) — download it yourself; `.gitignore` excludes `data/*.csv`.
+- 2016 cohorts are excluded from the retention heatmap (1–262 customers each, too small to be meaningful).
 - Cohort *retention* is intentionally sparse: it reflects the real ~3% repeat rate, and that sparsity is a finding, not a bug.
 - Revenue = item `price` + `freight_value` on `delivered` orders. Swap in `order_payments.payment_value` if you want gross paid amounts instead.
-
-## Dashboard
-
-![Overview](powerbi/olist1.png)
-![Cohort Retention](powerbi/olist2.png)
-![Customer Segments](powerbi/olist3.png)

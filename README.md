@@ -30,7 +30,7 @@ Customer segmentation and retention analysis on the [Olist Brazilian e-commerce 
 
 ---
 
-## Two design decisions worth knowing (and defending in interview)
+## Design Decisions:
 
 1. **`customer_id` is not a person.** In Olist it is regenerated per order; the true identity is `customer_unique_id`. Every RFM/cohort join goes through it — otherwise every customer looks like a one-time buyer and repeat behaviour disappears.
 2. **A textbook Frequency score is degenerate here.** With 97% one-time buyers, an F-quintile is meaningless, so segments are driven by **Recency × Monetary**, and the rare repeat buyers (`frequency ≥ 2`) are isolated as their own segment. R/F/M quintiles are still computed to show the technique, but the segmentation is adapted to what the data actually supports. This is the difference between running a template and reading the data.
